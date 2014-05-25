@@ -17,4 +17,5 @@ WHERE LoginName='iorena'), (SELECT PlayerID FROM players WHERE LoginName='tyyppi
 
 INSERT INTO drinkprices (DrinkID, Venue, DrinkPrice)
 VALUES ((SELECT DrinkID FROM drinks WHERE DrinkName='kalja'), (SELECT VenueID FROM venues WHERE VenueName='klusteri'), 1.0),
-((SELECT DrinkID FROM drinks WHERE DrinkName='vesi'), (SELECT VenueID FROM venues WHERE VenueName='klusteri'), 0.0);
+((SELECT DrinkID FROM drinks WHERE DrinkName='vesi'), (SELECT VenueID FROM venues WHERE VenueName='klusteri'), 0.0),
+((SELECT DrinkID FROM drinks WHERE DrinkName='coca-cola'), (SELECT VenueID FROM venues WHERE VenueName='klusteri'), 1.0);
