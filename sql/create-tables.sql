@@ -4,7 +4,8 @@ PlayerID SERIAL PRIMARY KEY,
 LoginName VARCHAR(15),
 FirstName VARCHAR(15),
 LastName VARCHAR(20),
-AdminStatus VARCHAR(1) 
+AdminStatus VARCHAR(1),
+Password VARCHAR(15)
 );
 
 CREATE TABLE teams 

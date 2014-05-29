@@ -1,6 +1,6 @@
 INSERT INTO players (LoginName, FirstName, LastName, AdminStatus)
-VALUES ('iorena','Essi', 'Salmenkivi', 'a'),
-('tyyppi','Kalle','Kallela','b');
+VALUES ('iorena','Essi', 'Salmenkivi', 'a', 'tolutolu'),
+('tyyppi','Kalle','Kallela','b', 'bisse');
 
 INSERT INTO drinks
 VALUES (1, 'coca-cola'),
