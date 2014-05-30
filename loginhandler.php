@@ -12,8 +12,11 @@
 		view("login", array('user' => $user, 'error' => 'Anna salasana'		));
 	}
 	$pass = $_POST["password"];
-	if (checkPassword($user, $pass))
+	$userid = findUser($user, $pass);
+	if ($userid!= null)
 	{
+		session_start();
+		$_SESSION['user'] = $userid;	
 		header('Location: mystats.php');
 	} else {
 		view("login",array('user' => $user, 'error' => 'Salasana väärin tai tunnusta ei löytynyt'));

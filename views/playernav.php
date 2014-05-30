@@ -7,10 +7,10 @@
 	<body>
 		<div class="col-md-offset-10 col-md-2">
 		<div class="panel panel-default">
-		 <a href="index.php">Etusivu</a>
-		 <a href="login.php">Kirjaudu</a>
-		 <a href="register.php">Luo tili</a>
-		 <a href="stats.php">Tilastot</a>
+		 <a href="mystats.php">Omat tiedot</a>
+		 <a href="addgame.php">Lisää peli</a>
+		 <a href="teams.php">Joukkueet</a>
+		 <a href="logout.php">Kirjaudu ulos</a>
 		</div>
 		</div>
 	<footer> 
