@@ -1,5 +1,5 @@
+<h1>Kirjaudu sisään</h1>
 <div class="container">
-	<h1>Kirjaudu sisään</h1>
 		<form class="form-horizontal" action="loginhandler.php" role="form" method="POST">
 		<div class="form-group">
 			<label for="inputUsername" class="col-md-2 control-label">Tunnus:</label>

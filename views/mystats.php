@@ -1,6 +1,7 @@
 <?php
 	$id = $_SESSION['user'];
 	require './libs/models/stats.php';
+	$fullname = getPlayerName($id);
 	$games = gamesPlayed($id);
 	$wl = winLoseRate($id);
 	$average = averagePoints($id);
@@ -15,6 +16,10 @@
 	<thead>
 	</thead>
 	<tbody>
+		<tr>
+		<td>Nimi:</td>
+		<td><?php echo $fullname; ?></td>
+		</tr>
 	 	<tr>
 	 	<td>Pelejä pelattu:</td>
 		<td><?php echo $games; ?></td>
