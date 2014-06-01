@@ -1,6 +1,5 @@
 <?php
 	require_once 'yhteys.php';
-		
 
 	function getPlayerName($id) {
 		$connection = getConnection();

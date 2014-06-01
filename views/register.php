@@ -4,7 +4,8 @@
 		<div class="form-group">
 			<label for="username" class="col-md-2 control-label">Tunnus:</label>
 		<div class="col-md-2">
-			<input type="text" class="form-control" id="inputUsername" name="username"> 
+			<input type="text" class="form-control" id="inputUsername" name="username" value="<?php
+	if (isset($data['username'])) { echo $data['username']; } ?>"> 
 		</div>
 		</div>
 		<div class="form-group">
@@ -30,7 +31,7 @@
 		<div class="form-group">
 			<label for="password2" class="col-md-2 control-label">Uudestaan:</label>
 		<div class="col-md-2">
-			<input type="password" class="form-control" id="password" name="password">
+			<input type="password" class="form-control" id="password2" name="password2">
 		</div>
 		</div>
 		<div class="form-group">
