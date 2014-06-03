@@ -11,6 +11,16 @@
 		return $result;	
 	}
 
+	function findUserID($username)
+	{
+		$connection = getConnection();
+		$sql = "SELECT playerid FROM players WHERE loginname = ? LIMIT 1";
+		$query = $connection->prepare($sql);
+		$query->execute(array($username));
+		$result = $query->fetchColumn();
+		return $result;	
+	}
+
 	function userExists($username) {
 		$connection = getConnection();
 		$sql = "SELECT playerid FROM players WHERE loginname = ?";
@@ -22,6 +32,15 @@
 		}
 		return true;
 	}
+	
+	function getPlayers() {
+		$connection = getConnection();
+		$sql = "SELECT firstname, lastname, loginname FROM players";
+		$query = $connection->prepare($sql);
+		$query->execute();
+		$users = $query->fetchAll(); 
+		return $users;
+	}
 
 	function addUser($username, $password, $firstname, $lastname) {
 		$connection = getConnection();
@@ -31,4 +50,9 @@
 		return $successful;		
 		}
 		
+	function getTopFive() {
+		$connection = getConnection();
+		$sql = "SELECT loginname,  FROM players WHERE";
+		return 0;
+	}
 ?>

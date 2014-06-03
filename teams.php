@@ -4,7 +4,7 @@
 	if (!loggedIn()) {
 		view("login", array('error' => 'Kirjaudu sisään'));
 	} else {
-		$page = 'mystats';
+		$page = 'teams';
 		require'./views/playernav.php';
 	}
-	
+

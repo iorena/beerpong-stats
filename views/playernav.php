@@ -5,7 +5,7 @@
 		<link href="./css/bootstrap.css" rel="stylesheet">
 	</head>
 	<body>
-		<div class="col-md-offset-10 col-md-2">
+		<div class="col-md-4">
 		<div class="panel panel-default">
 		 <a href="mystats.php">Omat tiedot</a>
 		 <a href="addgame.php">Lisää peli</a>
@@ -19,5 +19,4 @@
 	<p><?php echo $data["error"]; ?></p>
 	<?php } ?>
 	</footer>
-
 </html>

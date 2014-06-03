@@ -15,11 +15,11 @@
 		</div>
 	<br>
 	<?php require 'views/' . $page . '.php'; ?>
-	<div class="col-md-offset-2 col-md-5">
+		<div class="col-md-offset-2 col-md-5">
 	<footer> 
-	<?php if (isset($data["error"])) { ?>
-	<p><?php echo $data["error"]; ?></p>
-	<?php } ?>
+		<?php if (isset($data["error"])) { ?>
+		<p><?php echo $data["error"]; ?></p>
+		<?php } ?>
 	</footer>
 	</div>
 
