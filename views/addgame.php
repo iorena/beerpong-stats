@@ -7,6 +7,7 @@ $players = getPlayers();  ?>
 	<h1>Lisää peli</h1>
 	<div class="form-group">
 	<form class="form-horizontal" action="addgamedata.php" method="POST" role="form">
+	<input type="hidden" class="form-control" name="date" value="2014-06-04 00:00:00"<?php echo date('Y-m-d'); ?>>
 			<label for="venue" class="col-md-2 control-label">Pelipaikka:</label>
 		<div class="col-md-2">
 		<select class="form-control" name="venue">
@@ -48,12 +49,12 @@ $players = getPlayers();  ?>
 			<?php 
 				$drinks = getDrinks(2);	
 				foreach ($drinks as &$drink) { ?>
-				<option><?php echo $drink["drinkname"]; ?></option>
+				<option value=<?php echo $drink["drinkid"]; ?>><?php echo $drink["drinkname"]; ?></option>
 			<?php } ?>
 			</select></td>
 			<td><select name="t1p1score">
 			<?php for ($i = 0; $i<11; $i++) { ?>
-			<option><?php echo $i; ?></option>
+			<option value=<?php echo $i; ?>><?php echo $i; ?></option>
 			<?php } ?>
 			</select></td><td>
 			<select name="t2p1">
@@ -66,12 +67,12 @@ $players = getPlayers();  ?>
 				<?php 
 				$drinks = getDrinks(2);	
 				foreach ($drinks as &$drink) { ?>
-				<option><?php echo $drink["drinkname"]; ?></option>
+				<option value=<?php echo $drink["drinkid"]; ?>><?php echo $drink["drinkname"]; ?></option>
 			<?php } ?>
 			</select></td>
 			<td><select name="t2p1score">
 			<?php for ($i = 0; $i<11; $i++) { ?>
-			<option><?php echo $i; ?></option>
+			<option value=<?php echo $i; ?>><?php echo $i; ?></option>
 			<?php } ?>
 			</select></td>
 		</tr>
@@ -87,12 +88,12 @@ $players = getPlayers();  ?>
 				<?php 
 				$drinks = getDrinks(2);	
 				foreach ($drinks as &$drink) { ?>
-				<option><?php echo $drink["drinkname"]; ?></option>
+				<option value=<?php echo $drink["drinkid"]; ?>><?php echo $drink["drinkname"]; ?></option>
 			<?php } ?>
 			</select></td>
 			<td><select name="t1p2score">
 			<?php for ($i = 0; $i<11; $i++) { ?>
-			<option><?php echo $i; ?></option>
+			<option value=<?php echo $i; ?>><?php echo $i; ?></option>
 			<?php } ?>
 			</select></td>
 			
@@ -107,12 +108,12 @@ $players = getPlayers();  ?>
 				<?php 
 				$drinks = getDrinks(2);	
 				foreach ($drinks as &$drink) { ?>
-				<option><?php echo $drink["drinkname"]; ?></option>
+				<option value=<?php echo $drink["drinkid"]; ?>><?php echo $drink["drinkname"]; ?></option>
 			<?php } ?>
 			</select></td>
 			<td><select name="t2p2score">
 			<?php for ($i = 0; $i<11; $i++) { ?>
-			<option><?php echo $i; ?></option>
+			<option value=<?php echo $i; ?>><?php echo $i; ?></option>
 			<?php } ?>
 			</select></td>
 		</tr>

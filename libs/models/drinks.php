@@ -3,7 +3,7 @@
 
 	function getDrinks($venue) {
 		$connection = getConnection();
-		$sql = "SELECT drinkname FROM drinks, drinkprices WHERE drinks.drinkid = drinkprices.drinkid AND venue = ? AND drinkprice is not NULL"; 
+		$sql = "SELECT drinkname, drinks.drinkid as drinkid FROM drinks, drinkprices WHERE drinks.drinkid = drinkprices.drinkid AND venue = ? AND drinkprice is not NULL"; 
 		$query = $connection->prepare($sql);
 		if ($query->execute(array($venue))) {
 			$drinks = $query->fetchAll();
