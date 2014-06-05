@@ -7,4 +7,3 @@
 		$page = 'mygames';
 		require'./views/playernav.php';
 	}
-	
