@@ -1,34 +1,6 @@
 <?php
 	require_once 'yhteys.php';
 	
-	class Game {
-		private $id;
-		private $team1;
-		private $team2;
-		private $venue;
-		private $date;
-	
-		public function __construct($id, $team1, $team2, $date, $venue) {
-			$this->id = $id;
-			$this->team1 = $team1;
-			$this->team2 = $team2;
-			$this->date = $date;
-			$this->venue = $venue;
-		}
-
-		public function getVenue() {
-			return $venue;
-		}
-
-		public function setVenue($venue) {
-			$this-venue = $venue;
-		}
-
-		public function getDate() {
-			return $date;
-		}
-	}
-	
 	function addIndivScore($game, $playerid, $score, $drink) {
 		$connection = getConnection();
 		$sql = "INSERT INTO indivscores (game, player, score, drink)
@@ -67,11 +39,45 @@
 
 	function getGames($id, $number) {
 		$connection = getConnection();
-		$sql = "SELECT gameid, gamedate FROM games WHERE ? IN (SELECT player1 FROM teams, games WHERE team1 = teamid OR team2 = teamid) OR ? IN (SELECT player2 FROM teams, games WHERE team1 = teamid OR team2 = teamid)";
+		$sql = "SELECT gameid, team1, team2, gamedate, venue FROM games WHERE ? IN (SELECT player1 FROM teams, games WHERE team1 = teamid OR team2 = teamid) OR ? IN (SELECT player2 FROM teams, games WHERE team1 = teamid OR team2 = teamid) ORDER BY gamedate";
 		$query = $connection->prepare($sql);
 		if ($query->execute(array($id, $id))) {
-			return array_slice($query->fetchAll(), 0, $number);
+			$games = array_slice($query->fetchAll(), 0, $number);
+			$gameobjs = array();
+			for ($i = 0; $i < count($games); $i++) {
+				$gameobjs[$i] = new Game($games[$i]["gameid"], $games[$i]["team1"], $games[$i]["team2"], $games[$i]["gamedate"], $games[$i]["venue"]);
+			}
+			return $gameobjs;
 		}
 		return null;
 
+	}
+
+	function getGame($id) {
+		$connection = getConnection();
+		$sql = "SELECT gameid, team1, team2, gamedate, venue FROM games WHERE gameid = ?";
+		$query = $connection->prepare($sql);
+		$query->execute(array($id));
+		$game = $query->fetch();
+		$gameobj = new Game($game["gameid"], $game["team1"], $game["team2"], $game["gamedate"], $game["venue"]);
+		return $gameobj;	
+	}
+
+	function deleteGame($gameid) {
+		$connection = getConnection();
+		$sql = "DELETE FROM games WHERE gameid = ?;";
+		$query = $connection->prepare($sql);
+		$query->execute(array($gameid));
+		$sql = "DELETE FROM indivscores WHERE game = ?;";
+		$query = $connection->prepare($sql);
+		$query->execute(array($gameid));
+
+	}
+
+
+	function changeVenue($gameid, $venue) {
+		$connection = getConnection();
+		$sql = "UPDATE games SET venue = ? WHERE gameid = ?;";
+		$query = $connection->prepare($sql);
+		$query->execute(array($venue, $gameid));
 	}

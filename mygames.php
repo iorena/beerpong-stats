@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	require './libs/functions.php';
+	require_once './libs/functions.php';
 	if (!loggedIn()) {
 		view("login", array('error' => 'Kirjaudu sisään'));
 	} else {

@@ -1,5 +1,6 @@
 <?php
 	$id = $_SESSION['user'];
+	require_once './libs/models/gameclass.php';
 	require_once './libs/models/teams.php';
 	require_once './libs/models/games.php';
 	require_once './libs/models/stats.php';
@@ -8,6 +9,12 @@
 	} else {
 		$games = null;
 	}	
+
+	if (isset($_POST["venue"])) {
+		changeVenue($_POST["gameid"], $_POST["venue"]);		
+		unset($_POST["venue"], $_POST["gameid"]);
+	
+	}
 
 	?>
 <div class="container">
@@ -34,31 +41,67 @@
 	<tbody>
 		<?php foreach ($games as $game) { ?>
 			<tr>
-			<td><?php echo getTeamName($game["gameid"], $id); ?></td>
-			<td><?php echo $game["gamedate"]; ?></td>
-			<td><?php echo getGameScore($game["gameid"], $id); ?></td>
+			<td><?php echo $game->getTeamName($id); ?></td>
+			<td><?php echo $game->getDate(); ?></td>
+			<td><?php echo $game->getScore($id); ?></td>
 			<td><form class="form-vertical" action="mygames.php" method="POST" role="form">
-			<input type="hidden" name="gameid" value=<?php echo $game["gameid"]; ?>><button type="submit">Lisätietoja</button>
+			<input type="hidden" name="game" value=<?php echo $game->getId(); ?>><button type="submit">Lisätietoja</button>
+			</form></td>
+			<td><form class="form-vertical" action="deletegame.php" method="POST" role="form">
+			<input type="hidden" name="gameid" value=<?php echo $game->getId(); ?>>
+			<button type="submit">Poista</button>
 			</form></td>
 			</tr>
 		<?php } ?>
-	</tbody>
+		</tbody>
 	</table>
-	<?php if (isset($_POST["gameid"])) { 
-		$gameid = $_POST["gameid"]; ?>
+	
+	<?php if (isset($_POST["game"])) { 
+		require_once './libs/models/venues.php';
+		$gameid = $_POST["game"];
+		$game = getGame($gameid); ?>
+
+		<h2>Pelin tiedot</h2>
 		<table class="table">
 		<thead>
 		</thead>
 		<tbody>
 			<tr>
+			<td><?php echo getTeamName($game->getTeam1()); ?></td>
+			<td>vs</td>
+			<td><?php echo getTeamName($game->getTeam2()); ?></td>
+			<td></td>
+			</tr>
+			<tr>
 			<td>Paikka: </td>
-			<td><?php echo getVenue($gameid); ?></td>
-			<td><button type="button">Tallenna</button></td>
+			<td>
+			<form class="form-vertical" action="mygames.php" method="POST" role="form">
+			<input type="hidden" name="gameid" value=<?php echo $game->getID(); ?>>
+			<select class="form-control" name="venue">
+		<?php $venues = getVenues();
+			foreach ($venues as &$venue) { ?>
+			<option value=<?php echo $venue["venueid"]; 
+			if ($venue["venueid"] == $game->getVenue()) { ?>
+				selected="selected"
+			<?php } ?>><?php echo $venue["venuename"]; ?>
+			</option>
+		<?php } ?>
+		</select></td>
+			<td><button type="submit">Tallenna</button></td></form>
 			</tr>
 			<tr>
 			<td>Aika: </td>
-			<td><?php echo getDate($gameid);
-
-
-
-	}
+			<td><?php echo $game->getDate(); ?></td>
+			</tr>
+			<tr>
+			<td>Lisätiedot: <td>
+			</tr>
+		</tbody>
+		</table>
+	<?php } else { ?>
+		<div class="col-md-offset-4 col-md-2">
+		<form action="addgame.php">
+			<button type="submit">Lisää peli</button>
+		</form>
+		</div>
+	<?php } ?>

@@ -10,3 +10,12 @@
 			return $result;
 		}
 	}
+
+	function getVenueName($id) {
+		$connection = getConnection();
+		$sql = "SELECT venuename FROM venues WHERE venueid = ?";
+		$query = $connection->prepare($sql);
+		$query->execute(array($id));
+		$result = $query->fetchColumn();
+		return $result;
+	}

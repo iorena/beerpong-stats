@@ -15,7 +15,7 @@
 		</div>
 		</div>
 	<footer> 
-	<?php require 'views/' . $page . '.php';
+	<?php require './views/' . $page . '.php';
 	if (isset($data["error"])) { ?>
 	<p><?php echo $data["error"]; ?></p>
 	<?php } ?>

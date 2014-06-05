@@ -13,15 +13,27 @@
 
 	}
 	
-	function getTeamName($game, $id) {
+	function getTeamID($game, $id) {
 		$connection = getConnection();
 		$sql = "SELECT teamid FROM teams, games WHERE teamid = team1 OR teamid = team2 AND gameid = ? AND ? != player1 AND ? != player2";
 		$query = $connection->prepare($sql);
 		$query->execute(array($game, $id, $id));
 		return $query->fetchColumn();
-	
 
+	}
 
+	function getTeamName($teamid) {
+		$connection = getConnection();
+		$sql = "SELECT teamname, player1, player2 FROM teams WHERE teamid = ?";
+		$query = $connection->prepare($sql);
+		$query->execute(array($teamid));
+		$result = $query->fetch();
+		if ($result["teamname"] != null) {
+			return $result["teamname"];
+		}
+		$p1 = $result["player1"];
+		$p2 = $result["player2"];
+		return getTeammate($teamid, $p1).' + '.getTeammate($teamid, $p2);	
 	}
 
 	function getTeammate($teamid, $id) {
