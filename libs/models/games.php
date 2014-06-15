@@ -9,13 +9,13 @@
 		$query->execute(array($game, $playerid, $score, $drink));
 	}
 
-	function addGame($team1, $team2, $date, $venue) {
+	function addGame($team1, $team2, $date, $venue, $info) {
 
 		$connection = getConnection();
-		$sql = "INSERT INTO games (gameid, team1, team2, gamedate, venue)
-		VALUES (DEFAULT, ?, ?, ?, ?) RETURNING gameid;";
+		$sql = "INSERT INTO games (gameid, team1, team2, gamedate, venue, info)
+		VALUES ((SELECT MAX(gameid) FROM games) + 1, ?, ?, ?, ?, ?) RETURNING gameid;";
 		$query = $connection->prepare($sql);
-		$query->execute(array($team1, $team2, $date, $venue));
+		$query->execute(array($team1, $team2, $date, $venue, $info));
 		return $query->fetchColumn();
 
 	}
@@ -39,13 +39,13 @@
 
 	function getGames($id, $number) {
 		$connection = getConnection();
-		$sql = "SELECT gameid, team1, team2, gamedate, venue FROM games WHERE ? IN (SELECT player1 FROM teams, games WHERE team1 = teamid OR team2 = teamid) OR ? IN (SELECT player2 FROM teams, games WHERE team1 = teamid OR team2 = teamid) ORDER BY gamedate";
+		$sql = "SELECT gameid, team1, team2, gamedate, venue, info FROM games WHERE ? IN (SELECT player1 FROM teams, games WHERE team1 = teamid OR team2 = teamid) OR ? IN (SELECT player2 FROM teams, games WHERE team1 = teamid OR team2 = teamid) ORDER BY gamedate";
 		$query = $connection->prepare($sql);
 		if ($query->execute(array($id, $id))) {
 			$games = array_slice($query->fetchAll(), 0, $number);
 			$gameobjs = array();
 			for ($i = 0; $i < count($games); $i++) {
-				$gameobjs[$i] = new Game($games[$i]["gameid"], $games[$i]["team1"], $games[$i]["team2"], $games[$i]["gamedate"], $games[$i]["venue"]);
+				$gameobjs[$i] = new Game($games[$i]["gameid"], $games[$i]["team1"], $games[$i]["team2"], $games[$i]["gamedate"], $games[$i]["venue"], $games[$i]["info"]);
 			}
 			return $gameobjs;
 		}
@@ -55,11 +55,11 @@
 
 	function getGame($id) {
 		$connection = getConnection();
-		$sql = "SELECT gameid, team1, team2, gamedate, venue FROM games WHERE gameid = ?";
+		$sql = "SELECT gameid, team1, team2, gamedate, venue, info FROM games WHERE gameid = ?";
 		$query = $connection->prepare($sql);
 		$query->execute(array($id));
 		$game = $query->fetch();
-		$gameobj = new Game($game["gameid"], $game["team1"], $game["team2"], $game["gamedate"], $game["venue"]);
+		$gameobj = new Game($game["gameid"], $game["team1"], $game["team2"], $game["gamedate"], $game["venue"], $game["info"]);
 		return $gameobj;	
 	}
 

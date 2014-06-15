@@ -33,16 +33,17 @@
 		return 0;
 	}
 	
-	function averagePoints($id) {
+	function allPoints($id) {
 		$connection = getConnection();
 		$sql = "SELECT SUM(score) FROM indivscores WHERE player = ?";
 		$query = $connection->prepare($sql);
 		if ($query->execute(array($id))) {
 			$result = $query->fetchColumn();
-			return gamesPlayed($id) / $result;
+			return $result;
 		}
 		return 0;
 	}
+
 
 	function winLoseRate($id) {
 		return 0;
@@ -67,15 +68,22 @@
 		}
 	}
 	function favDrink($id) {
+		$connection = getConnection();
+		$sql = "SELECT drinkname FROM indivscores, drinks WHERE player = ? AND drink = drinkid GROUP BY drinkname ORDER BY COUNT(drinkname)";
+		$query = $connection->prepare($sql);
+		if ($query->execute(array($id))) {
+			return $query->fetchColumn();
+		}
 		return "ilmainen";
 	}
+
 	function moneySpent($id) {
 		$connection = getConnection();
-		$sql = "SELECT SUM(drinkprice) * 3 * COUNT(indivscores.game) FROM indivscores, games, drinkprices WHERE player = ? AND indivscores.game = games.gameid AND drinkprices.venue = games.venue";
+		$sql = "SELECT SUM(drinkprice) FROM indivscores, drinkprices, games WHERE player = ? AND drink = drinkid AND games.venue = drinkprices.venue AND game = gameid";
 		$query = $connection->prepare($sql);
 		if ($query->execute(array($id))) {
 			$result = $query->fetchColumn();
-			return $result;
+			return $result * 3;
 		}
 		return 0;
 	}	

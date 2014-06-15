@@ -41,7 +41,7 @@
 		view("register", array('firstname' => $firstname, 'lastname' => $lastname, 'error' => 'Tunnus on jo käytössä'));
 	}
 
-	if (!isset($_POST["password"]) || !isset($_POST["password2"]))
+	if (empty($_POST["password"]) || empty($_POST["password2"]))
 	{
 		view("register", array('username' => $user, 'firstname' =>  $firstname, 'lastname' => $lastname, 'error' => 'Anna salasana'));
 	}

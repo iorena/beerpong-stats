@@ -25,4 +25,7 @@ VALUES (1, 1, 2, '2014-05-01 00:31:00', 1),
 INSERT INTO drinkprices (DrinkID, Venue, DrinkPrice)
 VALUES ((SELECT DrinkID FROM drinks WHERE DrinkName='kalja'), (SELECT VenueID FROM venues WHERE VenueName='klusteri'), 1.0),
 ((SELECT DrinkID FROM drinks WHERE DrinkName='vesi'), (SELECT VenueID FROM venues WHERE VenueName='klusteri'), 0.0),
-((SELECT DrinkID FROM drinks WHERE DrinkName='coca-cola'), (SELECT VenueID FROM venues WHERE VenueName='klusteri'), 1.0);
+((SELECT DrinkID FROM drinks WHERE DrinkName='coca-cola'), (SELECT VenueID FROM venues WHERE VenueName='klusteri'), 1.0),
+((SELECT DrinkID FROM drinks WHERE DrinkName='kalja'), 1, 1.0),
+((SELECT DrinkID FROM drinks WHERE DrinkName='vesi'), 1, 0.0),
+((SELECT DrinkID FROM drinks WHERE DrinkName='coca-cola'), 1, 1.0);

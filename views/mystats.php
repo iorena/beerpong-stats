@@ -4,7 +4,8 @@
 	$fullname = getPlayerName($id);
 	$games = gamesPlayed($id);
 	$wl = winLoseRate($id);
-	$average = averagePoints($id);
+	$points = allPoints($id);
+	$average = $points / $games;
 	$best = bestPoints($id);
 	$worst = worstPoints($id);
 	$drink = favDrink($id);
@@ -28,6 +29,10 @@
 	 	<td>Voittoprosentti:</td>
 		<td><?php echo $wl; ?></td>
 	 </tr>
+		<tr>
+		<td>Upotuksia yhteensä:</td>
+		<td><?php echo $points; ?></td>
+		</tr>
 	 	<tr>
 	 	<td>Upotuksia/peli:</td>
 		<td><?php echo $average; ?></td>
@@ -46,6 +51,6 @@
 	 </tr>
 	<tr>
 	 	<td>Rahaa käytetty:</td>
-		<td><?php echo $money; ?></td>
+		<td><?php echo $money; ?> €</td>
 	 </tr>
 

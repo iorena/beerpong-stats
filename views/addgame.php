@@ -12,7 +12,8 @@ $players = getPlayers();  ?>
 		<div class="col-md-2">
 		<select class="form-control" name="venue">
 		<?php foreach ($venues as &$venue) { ?>
-	<option value=<?php echo $venue["venueid"]; ?>><?php echo $venue["venuename"]; ?>
+	<option value=<?php echo $venue["venueid"]; if ($_POST["venue"] == $venue["venueid"])
+	{ ?> selected="selected" <?php } ?>><?php echo $venue["venuename"]; ?>
 		</option>
 		<?php } ?>
 		</select>
@@ -20,13 +21,15 @@ $players = getPlayers();  ?>
 		</div>
 		</div>
 
-	<div class="col-md-offset-8 col-md-3" id="jouk1"><span>Joukkue 1</span></div>
-		<div class="col-md-offset-1 col-md-3" id="jouk2"> 
-		<span>Joukkue 2</span> 
-		</div>
-		
 		 <table class="table">
 		 <thead>
+		<tr>
+			<th></th>
+			<th>Joukkue 1</th>
+			<th></th>
+			<th></th>
+			<th>Joukkue 2</th>
+		</tr>
 		 <tr>
 		 	<th>Nimi</th>
 			<th>Juoma</th>
@@ -41,7 +44,7 @@ $players = getPlayers();  ?>
 				<td>
 			<select name="t1p1">
 				<?php foreach ($players as &$name) { ?>
-			<option value=<?php echo findUserID($name["loginname"]); ?>><?php echo $name["firstname"].' '.$name["lastname"]; ?></option>
+			<option value=<?php $id = findUserID($name["loginname"]); echo $id; if ($data["t1p1"] == $id) { ?> selected="selected" <?php } ?>><?php echo $name["firstname"].' '.$name["lastname"]; ?></option>
 			<?php } ?>
 		</select>
 			</td>
@@ -49,7 +52,7 @@ $players = getPlayers();  ?>
 			<?php 
 				$drinks = getDrinks(2);	
 				foreach ($drinks as &$drink) { ?>
-				<option value=<?php echo $drink["drinkid"]; ?>><?php echo $drink["drinkname"]; ?></option>
+				<option value=<?php $drink = $drink["drinkid"]; echo $drink; if ($data["t1p1drink"] == $drink { ?> selected="selected" <?php } ?>><?php echo $drink["drinkname"]; ?></option>
 			<?php } ?>
 			</select></td>
 			<td><select name="t1p1score">
@@ -59,7 +62,7 @@ $players = getPlayers();  ?>
 			</select></td><td>
 			<select name="t2p1">
 			<?php foreach ($players as &$name) { ?>
-			<option value=<?php echo findUserID($name["loginname"]); ?>><?php echo $name["firstname"].' '.$name["lastname"]; ?></option>
+			<option value=<?php $id = findUserID($name["loginname"]); echo $id; if ($data["t2p1"] == $id) { ?> selected="selected" <?php } ?>><?php echo $name["firstname"].' '.$name["lastname"]; ?></option>
 			<?php } ?>
 </select>
 			</td>
@@ -67,7 +70,7 @@ $players = getPlayers();  ?>
 				<?php 
 				$drinks = getDrinks(2);	
 				foreach ($drinks as &$drink) { ?>
-				<option value=<?php echo $drink["drinkid"]; ?>><?php echo $drink["drinkname"]; ?></option>
+				<option value=<?php $drink = $drink["drinkid"]; echo $drink; if ($data["t2p1drink"] == $drink { ?> selected="selected" <?php } ?>><?php echo $drink["drinkname"]; ?></option>
 			<?php } ?>
 			</select></td>
 			<td><select name="t2p1score">
@@ -80,7 +83,7 @@ $players = getPlayers();  ?>
 			<td>
 			<select name="t1p2">
 			<?php foreach ($players as &$name) { ?>
-			<option value=<?php echo findUserID($name["loginname"]); ?>><?php echo $name["firstname"].' '.$name["lastname"]; ?></option>
+			<option value=<?php $id = findUserID($name["loginname"]); echo $id; if ($data["t1p2"] == $id) { ?> selected="selected" <?php } ?>><?php echo $name["firstname"].' '.$name["lastname"]; ?></option>
 			<?php } ?>
 </select>
 			</td>
@@ -88,7 +91,7 @@ $players = getPlayers();  ?>
 				<?php 
 				$drinks = getDrinks(2);	
 				foreach ($drinks as &$drink) { ?>
-				<option value=<?php echo $drink["drinkid"]; ?>><?php echo $drink["drinkname"]; ?></option>
+				<option value=<?php $drink = $drink["drinkid"]; echo $drink; if ($data["t1p2drink"] == $drink { ?> selected="selected" <?php } ?>><?php echo $drink["drinkname"]; ?></option>
 			<?php } ?>
 			</select></td>
 			<td><select name="t1p2score">
@@ -100,7 +103,7 @@ $players = getPlayers();  ?>
 			<td>
 			<select name="t2p2">
 			<?php foreach ($players as &$name) { ?>
-			<option value=<?php echo findUserID($name["loginname"]); ?>><?php echo $name["firstname"].' '.$name["lastname"]; ?></option>
+			<option value=<?php $id = findUserID($name["loginname"]); echo $id; if ($data["t2p2"] == $id) { ?> selected="selected" <?php } ?>><?php echo $name["firstname"].' '.$name["lastname"]; ?></option>
 			<?php } ?>
 </select>
 			</td>
@@ -108,7 +111,7 @@ $players = getPlayers();  ?>
 				<?php 
 				$drinks = getDrinks(2);	
 				foreach ($drinks as &$drink) { ?>
-				<option value=<?php echo $drink["drinkid"]; ?>><?php echo $drink["drinkname"]; ?></option>
+				<option value=<?php $drink = $drink["drinkid"]; echo $drink; if ($data["t2p2drink"] == $drink { ?> selected="selected" <?php } ?>><?php echo $drink["drinkname"]; ?></option>
 			<?php } ?>
 			</select></td>
 			<td><select name="t2p2score">
@@ -124,7 +127,7 @@ $players = getPlayers();  ?>
 	<br>
 	<div class="form-group">
 		<div class="col-md-2">Lisähuomioita:</div>
-		<textarea rows="5" cols="30">
+		<textarea rows="5" cols="30" name="info">
 		</textarea>
 	<div class="form-group"><div class="col-md-offset-5 col-md-2">
 		<button type="submit" class="btn btn-default">Valmis</button>

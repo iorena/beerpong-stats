@@ -23,10 +23,11 @@
 		<label for="number" class="col-md-2 control-label">Listaa pelejä: </label>
 		<div class="col-md-1">
 		<select class="form-control" name="number">
-		<?php for ($i = 2; $i<11; $i = $i + 2) { ?>
+		<?php for ($i = 5; $i<16; $i = $i + 5) { ?>
 	<option value=<?php echo $i; ?>><?php echo $i; ?>
 		</option>
 		<?php } ?>
+		<option value=100>Kaikki</option>
 		</select>
 		</div>
 	<button type="submit">Ok</button>
@@ -95,6 +96,7 @@
 			</tr>
 			<tr>
 			<td>Lisätiedot: <td>
+			<td><?php echo $game->getInfo(); ?></td>
 			</tr>
 		</tbody>
 		</table>

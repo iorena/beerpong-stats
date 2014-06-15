@@ -9,7 +9,7 @@ $games = getTotalGames(); ?>
 		</div>
 		<br>
 		<div class="col-md-3">
-		Palloja heitetty kuppiin: <?php echo $points["points"]; ?>
+		Palloja heitetty kuppiin: <?php echo $points; ?>
 		</div>
 		<br><br><br>
 		<img src="pongi.jpg" align="middle" alt="Kuva: Jere Toivonen (cs.helsinki.fi/u/jeto/p/)">
