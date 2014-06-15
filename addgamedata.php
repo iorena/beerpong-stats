@@ -10,7 +10,7 @@
 	}
 	
 	if (!scoreOfTen($_POST["t1p1score"], $_POST["t1p2score"], $_POST["t2p1score"], $_POST["t2p2score"])) {
-		view("addgame", array('venue' => $_POST["venue"], 't1p1' => $_POST["t1p1"], 't1p2' => $_POST["t1p2"], 't2p1' => $_POST["t2p1"], 't2p2' => $_POST["t2p2"], 'error' => "Jommankumman joukkueen yhteispistemäärän pitäisi oll vähintään 10."));
+		view("addgame", array('venue' => $_POST["venue"], 't1p1' => $_POST["t1p1"], 't1p2' => $_POST["t1p2"], 't2p1' => $_POST["t2p1"], 't2p2' => $_POST["t2p2"], 'error' => "Jommankumman joukkueen yhteispistemäärän pitäisi olla vähintään 10."));
 	}
 	
 	if (strlen($_POST["info"]) > 500) {

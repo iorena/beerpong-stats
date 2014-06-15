@@ -65,7 +65,7 @@
 
 	function addTeam($p1, $p2) {
 		$connection = getConnection();
-		$sql = "INSERT INTO teams (player1, player2) VALUES (?, ?) RETURNING teamid;";
+		$sql = "INSERT INTO teams (teamid, player1, player2) VALUES ((SELECT MAX(teamid) FROM teams) + 1, ?, ?) RETURNING teamid;";
 		$query = $connection->prepare($sql);
 		if ($query->execute(array($p1, $p2))) {
 			$result = $query->fetchColumn();
@@ -80,4 +80,14 @@
 		if ($query->execute(array($teamid, $teamid))) {
 			return $query->fetchColumn();
 		}
+	}
+
+	function setTeamName($name, $id) {
+		$connection = getConnection();
+		$sql = "UPDATE teams
+		SET teamname = ?
+		WHERE teamid = ?;";
+		$query = $connection->prepare($sql);
+		$query->execute(array($name, $id));
+
 	}
