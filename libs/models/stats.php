@@ -44,10 +44,19 @@
 		return 0;
 	}
 
+	function gamesWon($id) {
+		$connection = getConnection();
+		$sql = "SELECT COUNT(game) FROM indivscores WHERE player = ? AND win = '1'";
+		$query = $connection->prepare($sql);
+		$query->execute(array($id));
+		$result = $query->fetchColumn();
+		return $result;
+	}
 
 	function winLoseRate($id) {
-		return 0;
+		return gamesWon($id) / getTotalGames($id) * 100;
 	}
+	
 	function bestPoints($id) {
 		$connection = getConnection();
 		$sql = "SELECT MAX(score) FROM indivscores WHERE player = ?";

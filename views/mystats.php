@@ -27,7 +27,7 @@
 	 </tr>
 	 	<tr>
 	 	<td>Voittoprosentti:</td>
-		<td><?php echo $wl; ?></td>
+		<td><?php echo $wl; ?> %</td>
 	 </tr>
 		<tr>
 		<td>Upotuksia yhteensä:</td>

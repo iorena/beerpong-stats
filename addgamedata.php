@@ -22,8 +22,14 @@
 
 	$gameid = addGame($team1, $team2, $_POST["date"], $_POST["venue"], $_POST["info"]);
 	$players = array("t1p1", "t1p2", "t2p1", "t2p2");
+	if ($_POST["t1p1score"] + $_POST["t1p2score"] > 9) {
+		$win = array("t1p1" => '1', "t1p2" => '1', "t2p1" => '0', "t2p2" => '0');
+	} else {
+		$win = array("t1p1" => '0', "t1p2" => '0', "t2p1" => '1', "t2p2" => '1');
+	}
+
 	foreach ($players as $pl) {
-		addIndivScore($gameid, $_POST[$pl], $_POST[$pl.'score'], $_POST[$pl.'drink']);
+		addIndivScore($gameid, $_POST[$pl], $_POST[$pl.'score'], $_POST[$pl.'drink'], $win[$pl]);
 
 	}
 	view("addgame", array('error' => "Peli lisätty"));

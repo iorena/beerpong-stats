@@ -12,7 +12,7 @@ $teams = getTeams($userid); ?>
 	<?php foreach ($teams as &$team) { ?>
 	<tr><td>Kaveri: <?php echo getTeammate($team["teamid"], $userid); ?></td>
 		<td>Pelejä pelattu: <?php echo getTeamGames($team["teamid"]); ?></td>
-		<td>Voittoprosentti: </td>
+		<td>Voittoprosentti: <?php echo getTeamWinLose($userid, $team["teamid"]); ?>%</td>
 		<form type="form-vertical" action="nameteam.php" role="form" method="POST">
 		<input type="hidden" value=<?php echo $team["teamid"]; ?> name="teamid">
 		<td><input type="text" class="form-control" id="teamname" name="teamname" <?php if (!empty($team["teamname"])) { ?> value=<?php echo $team["teamname"]; } ?>></td>

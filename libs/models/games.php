@@ -1,12 +1,12 @@
 <?php
 	require_once 'yhteys.php';
 	
-	function addIndivScore($game, $playerid, $score, $drink) {
+	function addIndivScore($game, $playerid, $score, $drink, $win) {
 		$connection = getConnection();
-		$sql = "INSERT INTO indivscores (game, player, score, drink)
-		VALUES (?, ?, ?, ?);";
+		$sql = "INSERT INTO indivscores (game, player, score, drink, win)
+		VALUES (?, ?, ?, ?, ?);";
 		$query = $connection->prepare($sql);
-		$query->execute(array($game, $playerid, $score, $drink));
+		$query->execute(array($game, $playerid, $score, $drink, $win));
 	}
 
 	function addGame($team1, $team2, $date, $venue, $info) {

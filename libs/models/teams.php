@@ -46,6 +46,7 @@
 		}
 		return null;
 	}
+
 	
 	function getTeam($p1, $p2) {
 		$connection = getConnection();
@@ -91,3 +92,14 @@
 		$query->execute(array($name, $id));
 
 	}
+
+	function getTeamWinLose($id, $teamid) {
+		$connection = getConnection();
+		$sql = "SELECT COUNT(gameid) FROM games, indivscores WHERE (team1 = ? OR team2 = ?) AND game = gameid AND player = ? AND win = '1'";
+		$query = $connection->prepare($sql);
+		$query->execute(array($teamid, $teamid, $id));
+		$wongames = $query->fetchColumn();
+		return $wongames / getTeamGames($teamid) * 100;
+
+	}
+
